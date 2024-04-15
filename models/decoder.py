@@ -80,7 +80,7 @@ class BertLMHeadModel(BertPreTrainedModel):
     def __init__(self, config):
         super().__init__(config)
 
-        self.bert = BertModel(config, add_pooling_layer=False, as_decoder=True)
+        self.bert = BertModel(config, add_pooling_layer=False)
         self.cls = BertOnlyMLMHead(config)
 
         self.init_weights()
@@ -151,6 +151,8 @@ class BertLMHeadModel(BertPreTrainedModel):
         return_dict = return_dict if return_dict is not None else self.config.use_return_dict
         if labels is not None:
             use_cache = False
+            
+        # print(self.cls.predictions.decoder.weight)
 
         outputs = self.bert(
             input_ids,
@@ -172,7 +174,7 @@ class BertLMHeadModel(BertPreTrainedModel):
         
         sequence_output = outputs[0]
         prediction_scores = self.cls(sequence_output)
-        
+
         if return_logits:
             return prediction_scores[:, :-1, :].contiguous()  
 
@@ -184,6 +186,7 @@ class BertLMHeadModel(BertPreTrainedModel):
             loss_fct = CrossEntropyLoss(reduction=reduction)
             lm_loss = loss_fct(shifted_prediction_scores.view(-1, self.config.vocab_size), labels.view(-1))
             lm_loss = lm_loss.view(prediction_scores.size(0),-1).sum(1)
+
             
         if soft_labels is not None:
             loss_distill = -torch.sum(F.log_softmax(shifted_prediction_scores, dim=-1)*soft_labels,dim=-1)
@@ -193,7 +196,7 @@ class BertLMHeadModel(BertPreTrainedModel):
         if not return_dict:
             output = (prediction_scores,) + outputs[2:]
             return ((lm_loss,) + output) if lm_loss is not None else output
-
+        
         return CausalLMOutputWithCrossAttentions(
             loss=lm_loss,
             logits=prediction_scores,

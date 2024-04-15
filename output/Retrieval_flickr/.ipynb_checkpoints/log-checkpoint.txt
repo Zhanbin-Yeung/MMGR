@@ -1,0 +1,4 @@
+{"train_lr": "0.000012", "train_index_loss_lm": "12.002355", "train_retrieval_loss_lm": "12.128462", "train_loss_lm": "24.130817", "epoch": 0}
+{"train_lr": "0.000010", "train_index_loss_lm": "9.603509", "train_retrieval_loss_lm": "9.774434", "train_loss_lm": "19.377943", "epoch": 1}
+{"train_lr": "0.000010", "train_index_loss_lm": "9.168223", "train_retrieval_loss_lm": "9.344750", "train_loss_lm": "18.512973", "epoch": 2}
+{"train_lr": "0.000010", "train_index_loss_lm": "8.904199", "train_retrieval_loss_lm": "9.082899", "train_loss_lm": "17.987098", "epoch": 3}

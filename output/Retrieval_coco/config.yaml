@@ -2,19 +2,32 @@ alpha: 0.4
 batch_size_test: 64
 batch_size_train: 32
 bert_config: configs/config_bert.json
+bert_config_decode: configs/config_bert_decode.json
+bos: '[CLS]'
+content: ./fine-tune_data/all_content.json
 distill: true
+docid: ./fine-tune_data/contents_docid.json
 embed_dim: 256
+eos: '[SEP]'
 image_res: 384
 image_root: ./data
+img_caption_ids: ./data/img_caption_ids.json
+index_file: [data/annotations/coco_train.json, data/annotations/coco_val.json, data/annotations/coco_test.json]
 k_test: 256
 momentum: 0.995
 optimizer: {lr: 1e-05, opt: adamW, weight_decay: 0.02}
+pad: '[PAD]'
 queue_size: 65536
-schedular: {cooldown_epochs: 0, decay_rate: 1, epochs: 5, lr: 1e-05, min_lr: 1e-06,
-  sched: cosine, warmup_epochs: 1, warmup_lr: 1e-05}
+retrieval_file: [data/annotations/coco_train.json]
+schedular: {cooldown_epochs: 0, decay_rate: 1, epochs: 30, lr: 3e-06, min_lr: 3e-06,
+  sched: cosine, warmup_epochs: 1, warmup_lr: 2e-05}
+summary: ./fine-tune_data/all_summary.json
 temp: 0.07
 test_file: data/annotations/coco_test.json
+test_img_caption_ids: ./data/test_img_caption_ids.json
+title: ./fine-tune_data/all_title.json
 train_file: [data/annotations/coco_train.json]
 val_file: data/annotations/coco_val.json
+val_img_caption_ids: ./data/val_img_caption_ids.json
 vision_width: 768
 warm_up: true

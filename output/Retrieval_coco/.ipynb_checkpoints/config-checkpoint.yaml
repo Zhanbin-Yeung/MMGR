@@ -1,0 +1,21 @@
+alpha: 0.4
+batch_size_test: 64
+batch_size_train: 32
+bert_config: configs/config_bert.json
+distill: false
+embed_dim: 256
+image_res: 384
+image_root: ./data
+img_caption_ids: ./data/img_caption_ids.json
+k_test: 256
+momentum: 0.995
+optimizer: {lr: 1e-05, opt: adamW, weight_decay: 0.02}
+queue_size: 65536
+schedular: {cooldown_epochs: 0, decay_rate: 1, epochs: 5, lr: 1e-05, min_lr: 1e-06,
+  sched: cosine, warmup_epochs: 1, warmup_lr: 1e-05}
+temp: 0.07
+test_file: data/annotations/coco_test.json
+train_file: [data/annotations/coco_train.json]
+val_file: data/annotations/coco_val.json
+vision_width: 768
+warm_up: true

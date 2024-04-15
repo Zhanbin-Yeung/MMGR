@@ -1,0 +1,30 @@
+alpha: 0.4
+batch_size_test: 64
+batch_size_train: 32
+bert_config: configs/config_bert.json
+bert_config_decode: configs/config_bert_decode.json
+bos: '[CLS]'
+distill: true
+embed_dim: 256
+eos: '[SEP]'
+image_res: 384
+image_root: ./flickr_data
+img_caption_ids: ./flickr_data/img_caption_ids.json
+index_file: [flickr_data/flickr30k_train.json, flickr_data/flickr30k_val.json, flickr_data/flickr30k_test.json]
+k_test: 256
+momentum: 0.995
+optimizer: {lr: 1e-05, opt: adamW, weight_decay: 0.02}
+pad: '[PAD]'
+queue_size: 65536
+retrieval_file: [flickr_data/flickr30k_train.json]
+schedular: {cooldown_epochs: 0, decay_rate: 1, epochs: 20, lr: 3e-06, min_lr: 4e-06,
+  sched: cosine, warmup_epochs: 1, warmup_lr: 1.5e-05}
+temp: 0.07
+test_file: flickr_data/flickr30k_test.json
+test_img_caption_ids: ./flickr_data/test_img_caption_ids.json
+train_file: [flickr_data/flickr30k_train.json]
+train_img_caption_ids: ./flickr_data/train_img_caption_ids.json
+val_file: flickr_data/flickr30k_val.json
+val_img_caption_ids: ./flickr_data/val_img_caption_ids.json
+vision_width: 768
+warm_up: true
